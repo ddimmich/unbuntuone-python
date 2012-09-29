@@ -1,0 +1,4 @@
+1.0
+---
+
+-  Initial release - fetches files from ubuntu - doesn't re-download files that are down and have a matching hash.
