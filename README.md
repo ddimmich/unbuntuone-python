@@ -17,10 +17,11 @@ virtualenv .
 
 Brief library usage instructions are:
 
-#log in     
+On the python command line you can log in:
+
 consumer, token =  acquire_token('username@bla', 'password' )
 
-#iterate over directory tree at given starting point (this will download music purchased at the ubuntu one music store):
+And then iterate over directory tree at given starting point (this example will download music purchased at the ubuntu one music store):
 
 fetch_children(consumer, token, '/~/.ubuntuone/Purchased from Ubuntu One')
 
