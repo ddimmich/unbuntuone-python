@@ -9,6 +9,7 @@ Installing:
 
 Check it out of the github account:
 
+```
 git clone https://github.com/ddimmich/unbuntuone-python.git
 
 cd ubuntuone-python
@@ -16,6 +17,7 @@ cd ubuntuone-python
 virtualenv .
 
 ./bin python setup.py
+```
 
 Brief library usage instructions are:
 
