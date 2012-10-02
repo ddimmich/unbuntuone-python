@@ -22,7 +22,7 @@ class Unauthorized(Exception):
 
 def acquire_token(email_address, password):
     #get hostname
-    description = 'Ubuntu One @ %s' % platform.uname()[-1]
+    description = 'Ubuntu One @ %s' % platform.node()
     """Aquire an OAuth access token for the given user."""
     # Issue a new access token for the user.
     request = urllib2.Request(
