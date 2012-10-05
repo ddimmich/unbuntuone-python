@@ -16,15 +16,25 @@ virtualenv .
 ./bin python setup.py
 ```
 
+If you just want to sync you can run the file sync.py:
+
+./bin/python sync.py --username=username@bla --password=asdf
+
+Once you have logged in once, you do not need to supply your username and password again.
+
+
+
 Brief library usage instructions are:
 
 On the python command line you can log in and then iterate over directory tree at given starting point (this 
 example will download music purchased at the ubuntu one music store):
 
 ```
-consumer, token =  acquire_token('username@bla', 'password' )
+data =  acquire_token('username@bla', 'password' )
+consumer, token = make_tokens(data)
 fetch_children(consumer, token, '/~/.ubuntuone/Purchased from Ubuntu One')
 ```
+
 
 
 Copyright Tauri-Tec Ltd. http://www.tauri-tec.com 

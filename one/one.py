@@ -20,6 +20,11 @@ class Unauthorized(Exception):
     """The provided email address and password were incorrect."""
 
 
+def make_tokens(data):
+    consumer = oauth2.Consumer(data['consumer_key'], data['consumer_secret'])
+    token = oauth2.Token(data['token'], data['token_secret'])
+    return consumer, token
+
 def acquire_token(email_address, password):
     #get hostname
     description = 'Ubuntu One @ %s' % platform.node()
@@ -39,18 +44,16 @@ def acquire_token(email_address, password):
         else:
             raise
     data = json.load(response)
-    print data
-    consumer = oauth2.Consumer(data['consumer_key'], data['consumer_secret'])
-    token = oauth2.Token(data['token'], data['token_secret'])
+    consumer, token = make_tokens(data)
 
     # Tell Ubuntu One about the new token.
     get_tokens_url = (
         'https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/')
     request = sign_request(consumer, token, get_tokens_url)
     response = urllib2.urlopen(request)
-    print response.headers
-    print response.read()
-    return consumer, token
+    #print response.headers
+    #print response.read()
+    return data
 
 def sign_request(consumer, token, url):
     oauth_request = oauth2.Request.from_consumer_and_token(
