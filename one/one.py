@@ -15,6 +15,7 @@ fetch_children(consumer, token, '/~/.ubuntuone/Purchased from Ubuntu One')
 """
 
 base_url = 'https://one.ubuntu.com/api/file_storage/v1'
+depth_char = '  '
 
 class Unauthorized(Exception):
     """The provided email address and password were incorrect."""
@@ -105,3 +106,19 @@ def fetch_file(consumer, token, child):
     file = open(filename, 'wb')
     file.write(response.read())
     file.close()
+
+def list_files(consumer, token, path, depth=0):
+    url = base_url + urllib2.quote(path) +'?include_children=true'
+    request = sign_request(consumer, token, url)
+    try:
+        response = urllib2.urlopen(request)
+    except urllib2.HTTPError:
+        print "Error finding: %s" % url
+        return
+    basepaths = json.loads(response.read())
+    for child in basepaths['children']:
+        if child['kind'] == 'directory':
+            print depth*depth_char + child[u'path'].split('/')[-1]
+            list_files(consumer, token, child['resource_path'], depth+1)
+        elif child['kind'] == 'file':
+            print depth*depth_char + child[u'path'].split('/')[-1]

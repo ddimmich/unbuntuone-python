@@ -35,8 +35,10 @@ def main():
     consumer, token = load_tokens(args.username, args.password)
 
     #iterate over tree starting here:
-    fetch_children(consumer, token, '/~/.ubuntuone/Purchased from Ubuntu One')
+    list_files(consumer, token, '/~/Ubuntu One/')
 
+    #fetches all your purchased music
+    #fetch_children(consumer, token, '/~/.ubuntuone/Purchased from Ubuntu One')
 
 if __name__ == "__main__":
     main()
